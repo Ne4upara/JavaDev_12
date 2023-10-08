@@ -19,19 +19,8 @@ public class TimeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html;charset=UTF-8");
         String timezoneParam = req.getParameter("timezone");
-
-        if (timezoneParam.isEmpty()) {
-            timeZone = TimeZone.getTimeZone("GMT");
-        } else {
-            int tz = Integer.parseInt(timezoneParam);
-            if (-1 < tz) {
-                timeZone = TimeZone.getTimeZone("GMT+" + timezoneParam);
-            } else {
-                timeZone = TimeZone.getTimeZone("GMT" + timezoneParam);
-            }
-        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        dateFormat.setTimeZone(timeZone);
+        dateFormat.setTimeZone(validTimeZone(timezoneParam));
         Date currentTime = new Date();
         String formattedTime = dateFormat.format(currentTime);
 
@@ -39,4 +28,16 @@ public class TimeServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/time.jsp");
         dispatcher.forward(req, resp);
     }
+
+    private String validTimeZone (String timezoneParam){
+        if (timezoneParam.isEmpty()) {
+            return TimeZone.getTimeZone("GMT");
+        } else {
+            int tz = Integer.parseInt(timezoneParam);
+            if (-1 < tz) {
+                return TimeZone.getTimeZone("GMT+" + timezoneParam);
+            } else {
+                return TimeZone.getTimeZone("GMT" + timezoneParam);
+            }
+        }
 }
