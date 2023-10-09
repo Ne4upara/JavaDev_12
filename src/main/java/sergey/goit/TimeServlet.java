@@ -13,7 +13,6 @@ import java.util.TimeZone;
 
 @WebServlet("/time")
 public class TimeServlet extends HttpServlet {
-    private TimeZone timeZone;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -29,7 +28,7 @@ public class TimeServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private String validTimeZone (String timezoneParam){
+    private TimeZone validTimeZone(String timezoneParam) {
         if (timezoneParam.isEmpty()) {
             return TimeZone.getTimeZone("GMT");
         } else {
@@ -40,4 +39,5 @@ public class TimeServlet extends HttpServlet {
                 return TimeZone.getTimeZone("GMT" + timezoneParam);
             }
         }
+    }
 }
