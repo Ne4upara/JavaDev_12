@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Current Time </title>
+</head>
+<body>
+<h1>Выбран часовой пояс (<span th:text="${gmt}"></span>)</h1>
+<p th:text="'Сейчас - ' + ${formattedTime}"></p>
+<p th:if="${timeCookie != null}" th:text="'Time Cookie = ' + ${timeCookie}"></p>
+</body>
+</html>

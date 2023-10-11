@@ -1,4 +1,4 @@
-package sergey.goit;
+package sergey.goit.filter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ public class TimezoneValidateFilter extends HttpFilter {
         if (timezoneParam.isEmpty()) {
             chain.doFilter(req, res);
         } else if (!timezoneParam.matches("-?\\d+") && !timezoneParam.matches("\\+\\d+")) {
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Timezone need digit");
+            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Timezone needs to be a digit");
         } else {
             int timezone = Integer.parseInt(timezoneParam);
             if (-12 <= timezone && timezone <= 14) {

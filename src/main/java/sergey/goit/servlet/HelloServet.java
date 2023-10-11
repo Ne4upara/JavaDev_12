@@ -1,4 +1,4 @@
-package sergey.goit;
+package sergey.goit.servlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
