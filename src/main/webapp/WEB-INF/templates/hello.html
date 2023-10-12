@@ -1,15 +1,18 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello</title>
+    <title>Введите часовой пояс</title>
 </head>
 <body>
 <div class="container">
-    <h1>Время.</h1>
-    <form action="${pageContext.request.contextPath}/time" method="GET">
-        <label for="timezone">Введите часовой пояс <input type="text" name="timezone" id="timezone"></label>
+    <h1>Введите часовой пояс.</h1>
+    <form action="/my/time" method="GET">
+        <label for="name">Пожалуста представтесь <input type="text" id="name" name="name"></label><br><br>
+        <label for="timezone">Введите часовой пояс <input type="text" name="timezone" id="timezone"></label><br>
         <button type="submit">Далее</button>
     </form>
+
 </div>
 </body>
 </html>

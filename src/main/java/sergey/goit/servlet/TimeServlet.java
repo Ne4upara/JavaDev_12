@@ -5,6 +5,7 @@ import org.thymeleaf.context.Context;
 import sergey.goit.util.CookieManager;
 import sergey.goit.util.ThymeleafController;
 import sergey.goit.util.TimeFormatter;
+import sergey.goit.util.UserName;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -32,6 +33,7 @@ public class TimeServlet extends HttpServlet {
 //        resp.setIntHeader("Refresh", 1); //auto-update page
         resp.setContentType("text/html;charset=UTF-8");
         String timezoneParam = req.getParameter("timezone");
+        String name = UserName.userName(req.getParameter("name"));
         Cookie timeCookie = CookieManager.getCookieZone(req, "timezone");
 
         if (timezoneParam.isEmpty()) {
@@ -49,6 +51,7 @@ public class TimeServlet extends HttpServlet {
 
         TemplateEngine engine = ThymeleafController.getTemplateEngine();
         Context context = new Context();
+        context.setVariable("name", name);
         context.setVariable("gmt", TimeFormatter.getTimezone());
         context.setVariable("formattedTime", formattedTime);
         if (timeCookie != null) {

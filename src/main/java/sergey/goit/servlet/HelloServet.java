@@ -1,6 +1,11 @@
 package sergey.goit.servlet;
 
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import sergey.goit.util.ThymeleafController;
+
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +16,18 @@ import java.io.IOException;
 
 @WebServlet("/hello")
 public class HelloServet extends HttpServlet {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ThymeleafController.init();
+    }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/hello.jsp");
-        rd.forward(req, resp);
+        TemplateEngine engine = ThymeleafController.getTemplateEngine();
+        Context context = new Context();
+        String html = engine.process("hello", context);
+        resp.getWriter().write(html);
     }
 }

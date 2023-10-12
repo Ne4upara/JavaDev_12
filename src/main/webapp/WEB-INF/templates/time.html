@@ -4,8 +4,9 @@
     <title>Current Time </title>
 </head>
 <body>
+<h1>Привет "<span th:text="${name}"></span>", вы вошли на страницу времени ) </h1>
 <h1>Выбран часовой пояс (<span th:text="${gmt}"></span>)</h1>
-<p th:text="'Сейчас - ' + ${formattedTime}"></p>
-<p th:if="${timeCookie != null}" th:text="'Time Cookie = ' + ${timeCookie}"></p>
+<h1>Сейчас - <span th:text="${formattedTime}"></span> </h1>
+<p th:if="${timeCookie != null}" th:text="'Использовани куки = ' + ${timeCookie}"></p>
 </body>
 </html>
